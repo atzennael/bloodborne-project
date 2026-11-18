@@ -1,0 +1,291 @@
+
+.music-player {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 65px;
+  padding: 8px 20px;
+
+  display: grid;
+  grid-template-columns: minmax(150px, 210px) minmax(180px, 1fr) minmax(100px, 140px);
+  align-items: center;
+  gap: 18px;
+
+  background: rgba(13, 12, 14, 0.97);
+  border-top: 1px solid rgba(151, 35, 43, 0.55);
+  box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.45);
+
+  color: #e5ded6;
+  font-family: inherit;
+
+  audio {
+    display: none;
+  }
+
+  // Información de la canción
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  &__vinyl {
+    min-width: 38px;
+    max-width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: block;
+    img {
+    width: 38px;
+    max-height: 38px;
+    max-width: 38px;
+    height: 38px;
+    object-fit: cover;
+    display: block;
+    };
+
+    &.playing {
+      animation: vinyl-spin 5s linear infinite;
+    }
+  }
+
+  &__track {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+
+    strong {
+      font-size: 13px;
+      font-weight: 600;
+      color: #eee5dc;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    small {
+      font-size: 11px;
+      color: #9d9290;
+    }
+  }
+
+  &__label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #a94349;
+  }
+
+  // Controles centrales
+  &__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      color: #d44a50;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #a94349;
+      outline-offset: 4px;
+    }
+  }
+
+  &__button {
+    padding: 5px;
+    background: transparent;
+    color: #b9aaa4;
+    font-size: 16px;
+
+    &:hover {
+      transform: scale(1.12);
+    }
+  }
+
+  &__play {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #76252c;
+    color: #fff0e8;
+    font-size: 14px;
+
+    &:hover {
+      background: #a3333b;
+      color: white;
+      transform: scale(1.08);
+    }
+  }
+
+  // Barra de progreso
+  &__progress {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    span {
+      min-width: 32px;
+      font-size: 10px;
+      color: #a99b96;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  // Estilos de los sliders
+  input[type="range"] {
+    appearance: none;
+    -webkit-appearance: none;
+
+    height: 4px;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+
+    background: linear-gradient(
+      to right,
+      #a6373e 0%,
+      #a6373e var(--progress, 0%),
+      #40383a var(--progress, 0%),
+      #40383a 100%
+    );
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+
+      background: #d6c1b5;
+      border: 2px solid #852b32;
+    }
+
+    &::-moz-range-thumb {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+
+      background: #d6c1b5;
+      border: 2px solid #852b32;
+    }
+  }
+
+  // Volumen
+  &__volume {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+
+    input {
+      width: 90px;
+    }
+  }
+
+  &__error {
+    margin: 0;
+    color: #d77b7b;
+    font-size: 10px;
+    text-align: center;
+  }
+}
+
+@keyframes vinyl-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Adaptación para tablets
+@media (max-width: 850px) {
+  .music-player {
+    grid-template-columns: 180px minmax(180px, 1fr) 120px;
+    gap: 15px;
+    padding: 12px 18px;
+
+    &__volume input {
+      width: 65px;
+    }
+  }
+}
+
+// Adaptación para móviles
+@media (max-width: 600px) {
+  .music-player {
+    min-height: 105px;
+    padding: 10px 14px;
+
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 8px 12px;
+
+    &__info {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    &__vinyl {
+      width: 38px;
+      height: 38px;
+    }
+
+    &__main {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      gap: 5px;
+    }
+
+    &__controls {
+      position: absolute;
+      right: 15px;
+      top: 12px;
+      gap: 12px;
+    }
+
+    &__progress {
+      width: 100%;
+    }
+
+    &__volume {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,174 @@
+
+$color--background: #232323;
+$color--text: #e2d6c3;
+$color--accent: #8f252b;
+
+$font-size--title: 2em;
+$font-size--subtitle: 12px;
+
+// GRID PRINCIPAL
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 500px);
+  justify-content: center;
+  gap: 30px;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+// TARJETAS
+.project-card {
+  position: relative;
+  width: 500px;
+  height: 278px;
+  margin: 0;
+
+  background-color: $color--background;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  cursor: pointer;
+  overflow: hidden;
+
+  &__container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__title {
+    position: absolute;
+    top: 35%;
+    left: 0;
+    z-index: 2;
+
+    margin: 0;
+    padding: 12px 25px;
+
+    font-size: $font-size--title;
+    color: $color--text;
+    background: rgba(15, 13, 13, 0.9);
+
+    border-left: 4px solid $color--accent;
+
+    transition: transform 0.4s ease-in-out;
+  }
+
+  &__text-block {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+
+    opacity: 0;
+    transform: translateX(100%);
+
+    padding: 30px 40px 30px 45%;
+    box-sizing: border-box;
+
+    color: $color--text;
+    font-size: $font-size--subtitle;
+
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.85) 45%,
+      rgba(0, 0, 0, 0.96) 100%
+    );
+
+    transition:
+      transform 0.4s ease-in-out,
+      opacity 0.4s ease-in-out;
+
+    p {
+      line-height: 1.8;
+      max-width: 450px;
+    }
+  }
+
+  // HOVER
+  &:hover {
+    .project-card__title {
+      transform: translateX(-110%);
+    }
+
+    .project-card__text-block {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+// IMÁGENES
+.body-lore {
+  background-image: url('./assets/lore_img.gif');
+}
+
+.body-personajes {
+  background-image: url('./assets/personajes_img.gif');
+}
+
+.body-locaciones {
+  background-image: url('./assets/locaciones_img.gif');
+}
+
+.body-armas {
+  background-image: url('./assets/armas_img.gif')
+}
+
+.body-vestimenta {
+  background-image: url('./assets/vestimenta_img.gif');
+}
+
+.body-herramientas {
+  background-image: url('./assets/herramientas_img.gif');
+}
+
+.body-objetos {
+  background-image: url('./assets/objetos_img.gif');
+}
+
+// RESPONSIVE: DOS COLUMNAS
+@media (max-width: 1650px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 500px));
+  }
+
+  .project-card {
+    width: 100%;
+  }
+}
+
+// RESPONSIVE: UNA COLUMNA
+@media (max-width: 1100px) {
+  .project-grid {
+    grid-template-columns: minmax(0, 500px);
+  }
+}
+
+@media (max-width: 600px) {
+  .project-grid {
+    padding: 25px 15px;
+    gap: 25px;
+  }
+
+  .project-card {
+    height: auto;
+    aspect-ratio: 540 / 300;
+
+    &__title {
+      font-size: 1.4em;
+    }
+
+    &__text-block {
+      padding: 25px;
+      background: rgba(0, 0, 0, 0.85);
+      font-size: 14px;
+    }
+  }
+}
