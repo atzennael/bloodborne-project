@@ -2,7 +2,7 @@ import './App.scss';
 import './body-cards.scss';
 import MusicPlayer from './components/music-player';
 import Header from './components/Header';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link } from 'react-router-dom';
 import Lore from './Lore';
 
 function Home(){
@@ -101,7 +101,7 @@ function App() {
   return (
     <>
     <div className="app-container">
-    <BrowserRouter>
+    <HashRouter>
     <Header/>
     <main className="app-main">
       <Routes>
@@ -113,7 +113,7 @@ function App() {
     <footer className="app-footer">
       <MusicPlayer/>
     </footer>
-</BrowserRouter>
+</HashRouter>
 </div>
     </>
   );
